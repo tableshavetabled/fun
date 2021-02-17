@@ -1,0 +1,13 @@
+# declare characters used in the game
+define MC = Character("Main Character", color="#0004ff")
+define MCI = Character(“Main Character Internal”, color = “”)
+define S = Character("Sunny", color="#005500")
+define I = Character("Ihraz", color="#aa0000")
+define R = Character("Rasmey", color="#550000")
+define C = Character("Chris", color="#005500")
+
+label start:
+    # everything after this point needs to be indented four spaces/ one tab
+    
+    
+  
