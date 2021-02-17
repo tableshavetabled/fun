@@ -6,8 +6,12 @@ define I = Character("Ihraz", color="#aa0000")
 define R = Character("Rasmey", color="#550000")
 define C = Character("Chris", color="#005500")
 
+define EXAMPLE = CHARPH:SLOGOIESHG
+
 label start:
     # everything after this point needs to be indented four spaces/ one tab
+    
+    
     
     
   
