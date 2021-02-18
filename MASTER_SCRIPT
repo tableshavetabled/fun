@@ -7,7 +7,22 @@ define R = Character("Rasmey", color="#550000")
 define C = Character("Chris", color="#005500")
 
 label start:
-    # everything after this point needs to be indented four spaces/ one tab
     
-    # this is an example of what pull requests do
+    # play music OMINOUS
+    # scene SILHOUETTE_FIGURES
+    # with fade
+    
+    show SHADOW1
+    “We need a new member for our operation”
+    
+    show SHADOW2
+	“You can’t trust just anybody”
+    
+    show SHADOW3
+	“We’re at a critical point”
+    
+	“...years in the making…”
+	“...matter of life and death…”
+
+    
   
