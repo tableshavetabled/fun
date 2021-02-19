@@ -1,31 +1,105 @@
-# declare characters used in the game
+﻿ # declare characters used in the game
 define MC = Character("Main Character", color="#0004ff")
-define MCI = Character(“Main Character Internal”, color = “”)
+define MCI = Character("Main Character Internal", color = "")
 define S = Character("Sunny", color="#005500")
 define I = Character("Ihraz", color="#aa0000")
 define R = Character("Rasmey", color="#550000")
 define C = Character("Chris", color="#005500")
+define dejected = Character("Dejected Student")
+
+# background images
+image darkRoom = "darkRoomTemp.jpg"
+image bedroomTemp = "bedroomTemp.jpg"
+image schoolPathTemp = "schoolPathTemp.jpg"
+
+# character images
+image chrisTemp = "chrisTemp.jpg"
+image ihrazTemp = "ihrazTemp.jpg"
+image sunnyTemp = "sunnyTemp.jpg"
+image rasmeyTemp = "rasmeyTemp.jpg"
+image dejectedGuyTemp = "dejectedGuyTemp.jpg"
 
 label start:
-    
-    # play music OMINOUS
-    # scene SILHOUETTE_FIGURES
-    # with fade
-    
-    show SHADOW1
-    “We need a new member for our operation”
-    
-    show SHADOW2
-	“You can’t trust just anybody”
-    
-    show SHADOW3
-	“We’re at a critical point”
-    
-	“...years in the making…”
-	“...matter of life and death…”
-	
-	
-	helollololo
+    play music ominous
+    scene darkRoom
 
+    show chrisTemp at top:
+        zoom 0.4
+    with fade
+    C "We need a new member for our operation"
+
+    hide chrisTemp
+    show ihrazTemp at top
+    with fade
+
+    I "You can’t trust just anybody"
+
+    hide ihrazTemp
+    show rasmeyTemp at top
+    with fade
+
+    R "We’re at a critical point"
+
+    hide rasmeyTemp
+    show sunnyTemp at top
+    with fade
+
+    S "This is the make or break moment"
+
+    hide sunnyTemp
+    with fade
+
+    "...years in the making…"
+    "...matter of life and death…"
+
+    "..."
+
+    stop music fadeout 1.0
+    with dissolve
+    jump wakeyWakey
+
+label wakeyWakey:
+    scene bedroomTemp
+    play sound "audio/alarmClock.mp3"
+    with fade
+    "...uggghhhhh"
+    "...make it stop"
+    stop sound
+    with dissolve
+
+    "Well, the day is finally here. My first day of classes!"
+    "I really couldn't sleep last night much though..."
+    "Guess I have been feeling a bit anxious about starting school since I don't know anyone here yet"
+    "...well, guess I had better get ready to go!"
+
+    scene schoolPathTemp:
+        zoom 3
+
+    "Campus in the fall sure is beautiful!"
+    "Ahhh, I can almost smell my success!"
+
+
+    show dejectedGuyTemp at top:
+        zoom 0.5
+    with fade
+    dejected "urrehaaaaghhhhhh..."
+
+    hide dejectedGuyTemp
+    with fade
     
-  
+    "...but thes students reek of desperation OTL"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return
