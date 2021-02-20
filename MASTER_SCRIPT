@@ -1,5 +1,5 @@
-﻿ # declare characters used in the game
-define MC = Character("Main Character", color="#0004ff")
+ # declare characters used in the game
+define MC = Character("Me", color="#0004ff")
 define MCI = Character("Main Character Internal", color = "")
 define S = Character("Sunny", color="#005500")
 define I = Character("Ihraz", color="#aa0000")
@@ -8,12 +8,14 @@ define C = Character("Chris", color="#005500")
 define dejected = Character("Dejected Student")
 define professor = Character("Professor")
 define unknown = Character("Unknown Student")
+define qMark = Character("?")
 
 # background images
 image darkRoom = "darkRoomTemp.jpg"
 image bedroomTemp = "bedroomTemp.jpg"
 image schoolPathTemp = "schoolPathTemp.jpg"
 image classroomTemp = "classroomTemp.jpg"
+image gogTemp = "gogTemp.png"
 
 # character images
 image chrisTemp = "chrisTemp.jpg"
@@ -22,14 +24,16 @@ image sunnyTemp = "sunnyTemp.jpg"
 image rasmeyTemp = "rasmeyTemp.jpg"
 image dejectedGuyTemp = "dejectedGuyTemp.jpg"
 
-# relationship points
-$ sunny_rp = 0
-$ ihraz_rp = 0
-$ chris_rp = 0
-$ rasmey_rp = 0
+
 
 # GAME START!!!
 label start:
+    # relationship points
+    $ sunny_rp = 0
+    $ ihraz_rp = 0
+    $ chris_rp = 0
+    $ rasmey_rp = 0
+
     play music ominous
     scene darkRoom
 
@@ -178,14 +182,14 @@ label firstClass:
     stop sound
     menu:
         "Bro, stop cheating":
-            # $ sunny_rp -= 1
+            $ sunny_rp -= 1
             jump sunnyDayOneRejected
 
         "Uhhh.. no?":
             jump sunnyDayOneNeutral
 
         "Yeah, it was B":
-            # $ sunny_rp += 1
+            $ sunny_rp += 1
             jump sunnyDayOneHelpful
 
 label sunnyDayOneRejected:
@@ -224,7 +228,80 @@ label sunnyDayOneContinue:
     "I have to head to English next"
     "Guess I will start heading over!"
 
-    scene schoolPathTemp
+    play music "audio/blueDream.mp3"
+    scene schoolPathTemp:
+        zoom 3
+    with fade
+    jump secondClass
+
+# SECOND CLASS BEGINS
+
+label secondClass:
+    "Ok... English next."
+    "The building should be somewhere around here."
+    "I've got a few minutes to get there."
+    "Oh man, my phone is about to die."
+    stop music
+    scene classroomTemp
+    with fade
+    play music "audio/sandCastle.mp3"
+    "I'll sit in the back where there's an outlet so I can charge it."
+    "..."
+    "...."
+    with fade
+    "Man this class really drags on."
+    qMark "*Rapid clicking*"
+    "What's that noise?"
+    unknown "Heyo"
+    show ihrazTemp at right
+    with fade
+    unknown "Could you plug in my laptop charge? The outlet is behind you."
+    unknown "I need it for class ;^)"
+    MC "Oh, well I just plugged my phone in and it was about to die."
+    unknown "Only for a few minutes, I really need it for this thing."
+
+    stop music fadeout 1.0
+    menu:
+        "Its English class, and the professor said no laptops.":
+            $ ihraz_rp -= 1
+            jump ihrazDayOneRejected
+
+        "Sorry man, my phone is about to die, I'll let you use it after though.":
+            jump ihrazDayOneNeutral
+
+        "Sure, but just until you're done with whatever.":
+            $ ihraz_rp += 1
+            jump ihrazDayOneHelpful
+
+label ihrazDayOneRejected:
+    unknown "Coulda just said no fam."
+    jump ihrazDayOneContinue
+
+label ihrazDayOneNeutral:
+    unknown "RIP Ok that's fair, just lemme know."
+    jump ihrazDayOneContinue
+
+label ihrazDayOneHelpful:
+    unknown "Thanks, I'll win this for you ;)"
+    "Win? I thought he was doing notes."
+    unknown "*clicks intensify*"
+    "What is he doing, lemme look."
+    show gogTemp at top
+    with fade
+    "Is this guy playing Gang of Gods? In class?"
+    "Is this something he usually does?"
+    hide gogTemp
+    MC "Soooo how's it coming?"
+    unknown "I'm about to win, thanks for the help!"
+    MC "That's... nice. No problem I guess."
+    jump ihrazDayOneContinue
+    
+label ihrazDayOneContinue:
+    "As boring as this class is, I should just try to pay attention."
+
+    
+
+
 
 
 
