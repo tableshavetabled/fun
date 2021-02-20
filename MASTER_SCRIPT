@@ -1,16 +1,21 @@
-﻿ # declare characters used in the game
-define MC = Character("Main Character", color="#0004ff")
+ # declare characters used in the game
+define MC = Character("Me", color="#0004ff")
 define MCI = Character("Main Character Internal", color = "")
 define S = Character("Sunny", color="#005500")
 define I = Character("Ihraz", color="#aa0000")
 define R = Character("Rasmey", color="#550000")
 define C = Character("Chris", color="#005500")
 define dejected = Character("Dejected Student")
+define professor = Character("Professor")
+define unknown = Character("Unknown Student")
+define qMark = Character("?")
 
 # background images
 image darkRoom = "darkRoomTemp.jpg"
 image bedroomTemp = "bedroomTemp.jpg"
 image schoolPathTemp = "schoolPathTemp.jpg"
+image classroomTemp = "classroomTemp.jpg"
+image gogTemp = "gogTemp.png"
 
 # character images
 image chrisTemp = "chrisTemp.jpg"
@@ -19,7 +24,16 @@ image sunnyTemp = "sunnyTemp.jpg"
 image rasmeyTemp = "rasmeyTemp.jpg"
 image dejectedGuyTemp = "dejectedGuyTemp.jpg"
 
+
+
+# GAME START!!!
 label start:
+    # relationship points
+    $ sunny_rp = 0
+    $ ihraz_rp = 0
+    $ chris_rp = 0
+    $ rasmey_rp = 0
+
     play music ominous
     scene darkRoom
 
@@ -58,6 +72,7 @@ label start:
     with dissolve
     jump wakeyWakey
 
+# PLAYER WAKES UP
 label wakeyWakey:
     scene bedroomTemp
     play sound "audio/alarmClock.mp3"
@@ -65,16 +80,20 @@ label wakeyWakey:
     "...uggghhhhh"
     "...make it stop"
     stop sound
-    with dissolve
+    play music "audio/mourningDove.mp3"
+    with fade
 
     "Well, the day is finally here. My first day of classes!"
     "I really couldn't sleep last night much though..."
     "Guess I have been feeling a bit anxious about starting school since I don't know anyone here yet"
     "...well, guess I had better get ready to go!"
+    stop music fadeout 4.0
 
+    ## WALK ON CAMPUS
     scene schoolPathTemp:
         zoom 3
 
+    play music "audio/blueDream.mp3"
     "Campus in the fall sure is beautiful!"
     "Ahhh, I can almost smell my success!"
 
@@ -86,8 +105,209 @@ label wakeyWakey:
 
     hide dejectedGuyTemp
     with fade
+
+    "...but these students reek of desperation OTL"
+    "Well, can't let that get me down! Time to head to History"
+    stop music fadeout 4.0
+    jump firstClass
+
+# FIRST CLASS BEGINS
+label firstClass:
+    play music "audio/sandCastle.mp3"
+    scene classroomTemp
+    "Wow, I can't believe I am finally in my first University class!"
+
+    with fade
+    professor "Welcome to your first day of classes!"
+    professor "I hope that we have a great semester together."
+    professor "As you all know, the syllabus for my class was sent out mid-summer"
+    professor "I am sure that you knew this was coming, but it's time for a brief syllabus quiz!"
+
+    with fade
+    "The Professor is giving us a quiz already??"
+    "Thank goodness I read the syllabus a few times over already..."
+    "I guess that being nervous and over-preparing pays off!"
+
+    professor "Please take a sheet and pass the rest down to those in your row."
+
+    with fade
+    professor "Now that each of you have a quiz, please begin!"
+
+    "Okay, question one..."
+    "It seems like this will be easy!"
+
+    "But... this feeling..."
+    "Am I being... watched?"
+
+    stop music fadeout 1.0
+    play sound "audio/heavyBreathing.mp3"
+    show sunnyTemp at topright
+    with fade
+
+    unknown "hhhhhh"
+    unknown "hhhhhhhhh"
+
+    MC "..uhhh"
+
+    unknown "Do you..."
+
+    MC "....yes?"
+
+    unknown "...know the answer to number 3?"
+
+
+###############################################################
+###################### EXAMPLE MENU ###########################
+# menu:
+#      "What should I do?"
+#
+#      "Drink coffee.":
+#          "I drink the coffee, and it's good to the last drop."
+#
+#      "Drink tea.":
+#          $ drank_tea = True
+#
+#          "I drink the tea, trying not to make a political statement as I do."
+#
+#      "Genuflect.":
+#          jump genuflect_ending
+#
+# label after_menu:
+#
+#      "After having my drink, I got on with my morning."
+##############################################################
+##############################################################
+
+## Insert relationship point here?
+    stop sound
+    menu:
+        "Bro, stop cheating":
+            $ sunny_rp -= 1
+            jump sunnyDayOneRejected
+
+        "Uhhh.. no?":
+            jump sunnyDayOneNeutral
+
+        "Yeah, it was B":
+            $ sunny_rp += 1
+            jump sunnyDayOneHelpful
+
+label sunnyDayOneRejected:
+    scene classroomTemp
+    unknown "*sad sniffles*"
+    "...why do I feel kind of bad now? ):"
+    "Still..."
+    jump sunnyDayOneContinue
+
+label sunnyDayOneNeutral:
+    scene classroomTemp
+    unknown "That's okay, I don't either"
+    "...yeah, I could tell"
+    jump sunnyDayOneContinue
+
+label sunnyDayOneHelpful:
+    scene classroomTemp
+    unknown "You are a true pal (:"
+    "Well, I am glad he thinks so! I guess?"
+    jump sunnyDayOneContinue
+
+label sunnyDayOneContinue:
+    scene classroomTemp
+    "This guy seems like he could be a little trouble... I should turn around before I get in trouble"
+    "I kinda get the feeling that guy is still staring, though"
+    play music "audio/sandCastle.mp3"
+
+    with fade
+    professor "Alright, that's time! Everyone please drop your quizzes at my desk on your way out!"
+
+    "That quiz seemed to go well, even with that... interesting encounter!"
+
+    with fade
+
+    "Looks like class is just about over"
+    "I have to head to English next"
+    "Guess I will start heading over!"
+
+    play music "audio/blueDream.mp3"
+    scene schoolPathTemp:
+        zoom 3
+    with fade
+    jump secondClass
+
+# SECOND CLASS BEGINS
+
+label secondClass:
+    "Ok... English next."
+    "The building should be somewhere around here."
+    "I've got a few minutes to get there."
+    "Oh man, my phone is about to die."
+    stop music
+    scene classroomTemp
+    with fade
+    play music "audio/sandCastle.mp3"
+    "I'll sit in the back where there's an outlet so I can charge it."
+    "..."
+    "...."
+    with fade
+    "Man this class really drags on."
+    qMark "*Rapid clicking*"
+    "What's that noise?"
+    I "Heyo"
+    show ihrazTemp at right
+    with fade
+    I "Could you plug in my laptop charge? The outlet is behind you."
+    I "I need it for class ;^)"
+    MC "Oh, well I just plugged my phone in and it was about to die."
+    I "Only for a few minutes, I really need it for this thing."
+
+    stop music fadeout 1.0
+    menu:
+        "Its English class, and the professor said no laptops.":
+            $ ihraz_rp -= 1
+            jump ihrazDayOneRejected
+
+        "Sorry man, my phone is about to die, I'll let you use it after though.":
+            jump ihrazDayOneNeutral
+
+        "Sure, but just until you're done with whatever.":
+            $ ihraz_rp += 1
+            jump ihrazDayOneHelpful
+
+label ihrazDayOneRejected:
+    I "Coulda just said no fam."
+    jump ihrazDayOneContinue
+
+label ihrazDayOneNeutral:
+    I "RIP Ok that's fair, just lemme know."
+    jump ihrazDayOneContinue
+
+label ihrazDayOneHelpful:
+    I "Thanks, I'll win this for you ;)"
+    "Win? I thought he was doing notes."
+    I "*clicks intensify*"
+    "What is he doing, lemme look."
+    show gogTemp at top
+    with fade
+    "Is this guy playing Gang of Gods? In class?"
+    "Is this something he usually does?"
+    hide gogTemp
+    MC "Soooo how's it coming?"
+    I "I'm about to win, thanks for the help!"
+    MC "That's... nice. No problem I guess."
+    jump ihrazDayOneContinue
     
-    "...but thes students reek of desperation OTL"
+label ihrazDayOneContinue:
+    "As boring as this class is, I should just try to pay attention."
+
+    
+
+
+
+
+
+
+
+
 
 
 
