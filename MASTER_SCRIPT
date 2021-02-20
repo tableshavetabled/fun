@@ -16,6 +16,7 @@ image bedroomTemp = "bedroomTemp.jpg"
 image schoolPathTemp = "schoolPathTemp.jpg"
 image classroomTemp = "classroomTemp.jpg"
 image gogTemp = "gogTemp.png"
+image diningHallTemp = "diningHallTemp.jpg"
 
 # character images
 image chrisTemp = "chrisTemp.jpg"
@@ -23,6 +24,7 @@ image ihrazTemp = "ihrazTemp.jpg"
 image sunnyTemp = "sunnyTemp.jpg"
 image rasmeyTemp = "rasmeyTemp.jpg"
 image dejectedGuyTemp = "dejectedGuyTemp.jpg"
+image emptyWallet = "emptyWallet.jpg"
 
 
 
@@ -97,7 +99,7 @@ label wakeyWakey:
     "Campus in the fall sure is beautiful!"
     "Ahhh, I can almost smell my success!"
 
-
+    ## DEJECTED GUY
     show dejectedGuyTemp at top:
         zoom 0.5
     with fade
@@ -130,6 +132,7 @@ label firstClass:
 
     professor "Please take a sheet and pass the rest down to those in your row."
 
+    ## POP QUIZ
     with fade
     professor "Now that each of you have a quiz, please begin!"
 
@@ -178,7 +181,7 @@ label firstClass:
 ##############################################################
 ##############################################################
 
-## Insert relationship point here?
+    ## HELP SUNNY?
     stop sound
     menu:
         "Bro, stop cheating":
@@ -211,6 +214,8 @@ label sunnyDayOneHelpful:
     "Well, I am glad he thinks so! I guess?"
     jump sunnyDayOneContinue
 
+
+## CLASS 1 CONTINUE
 label sunnyDayOneContinue:
     scene classroomTemp
     "This guy seems like he could be a little trouble... I should turn around before I get in trouble"
@@ -253,14 +258,15 @@ label secondClass:
     qMark "*Rapid clicking*"
     "What's that noise?"
     unknown "Heyo"
-    show ihrazTemp at right
+    show ihrazTemp at topright
     with fade
     unknown "Could you plug in my laptop charge? The outlet is behind you."
     unknown "I need it for class ;^)"
     MC "Oh, well I just plugged my phone in and it was about to die."
     unknown "Only for a few minutes, I really need it for this thing."
 
-    stop music fadeout 1.0
+## HELP IHRAZ??
+    # stop music fadeout 1.0
     menu:
         "Its English class, and the professor said no laptops.":
             $ ihraz_rp -= 1
@@ -295,11 +301,281 @@ label ihrazDayOneHelpful:
     unknown "I'm about to win, thanks for the help!"
     MC "That's... nice. No problem I guess."
     jump ihrazDayOneContinue
-    
+
 label ihrazDayOneContinue:
     "As boring as this class is, I should just try to pay attention."
 
-    
+    "Thankfully it is almost over though. Just a bit longer..."
+
+    with fade
+    "Finally, class is ending!"
+    "I have a good bit of time before my next class starts"
+    "I guess I will check out the dining hall!"
+
+    with fade
+    stop music
+    scene schoolPathTemp:
+        zoom 3
+### Walking to cafeteria
+    play music "audio/blueDream.mp3"
+    "Man, those two guys in my classes today really caught me off guard"
+    "The first guy was pretty... friendly? If not a bit weird"
+    "And that second guy... I wonder if he always plays games in class like that"
+    "If I did that I bet my grades would slip beyound salvation"
+    "Honestly, it's kind of impressive"
+    "Neither of them seem all that studious, but they must be pretty good at school if they made it here"
+
+    with fade
+    scene diningHallTemp:
+        zoom 3
+    "Wow, this place looks pretty nice!"
+    "...but wow, I was not expecting the prices to be this steep"
+    "I mean, a salad for $15.00?? It's like just having to pay tuition wasn't enough.."
+    "On top of that, I have my rent to worry about too"
+    with fade
+    show emptyWallet
+
+    "You know, it might be a good idea to start looking for alternatives..."
+    with fade
+    hide emptyWallet
+
+    "Time to hit up Yap!"
+
+    with fade
+    "Oh, there's a McReynold's right across the street from campus!"
+    "I think I may have seen it before"
+    "It doesn't seem like there's enough time to walk there and back before my next class, though"
+    "Guess I will hold off until dinner"
+
+    with fade
+    stop music
+    jump thirdClassBegins
+
+## THIRD CLASS
+
+label thirdClassBegins:
+    play music "audio/blueDream.mp3"
+    scene schoolPathTemp:
+        zoom 3
+    "Time to head to math!"
+    "I have never been that great at math, but thankfully I won't need to take too many classes while I'm here"
+    stop music
+    play music "audio/sandCastle.mp3"
+    scene classroomTemp
+    "Well, here we are!"
+    "I guess I am here a bit early since I was in a rush to leave the dining hall"
+    "Guess I will just relax a bit..."
+
+    "Oh man, I suddenly can't stop thinking about how hungry I am!"
+    "Hopefully I can get through these next two classes quickly..."
+    "Oh, here come's the professor. I need to try to pay attention"
+
+    professor "Good afternoon! I hope you all have had an enlightening first day so far"
+    professor "And if not, we will fix that now!"
+    professor "I prefer to just jump right into things, so let's get started!"
+    professor "Today we will be covering........"
+
+    "Oh man, I somehow feel like my ability to concentrate is gone"
+    "That's the last time I skip out on lunch..."
+    "I really need to be better about preparing"
+
+    with fade
+    professor "....so that problem was pretty straightforward with the use of the formula, right?"
+    "I could hardly follow that at all"
+    "......"
+
+    with fade
+    professor "...and that is how we can derive the answer!"
+    professor "I know it is only our first day of class together, but we really have no time to lose!"
+    professor "Let's see if you have been keeping up."
+
+    professor "You there - can you solve this problem on the board?"
+    professor "It should be simple if you follow the logic of the last example we did together."
+
+    "Oh my god, of all the times to be picked on for a quiz!!"
+    "What am I going to do?"
+
+    unknown "psssssst"
+    unknown "hey, on your right!"
+
+## CHRIS HELP
+    menu:
+        "Look right for help":
+            $ chris_rp += 1
+            jump chrisHelps
+        "Look left for help":
+            jump chrisNotHelp
+        "Look up to God for help":
+            $ chris_rp -= 1
+            jump godHelpsMaybeLol
+
+label chrisHelps:
+    show chris at topright
+    "Here, use this!"
+
+    "Wow, it looks like this guy already solved the problem in his notebook!"
+    MC "Uhhh.. 2b + 1?"
+    professor "That's correct! See? These problems aren't so bad."
+
+    "I WAS SAVED!!"
+    MC "Thanks so much for helping me out there, I have been feeling really distracted"
+    unknown "Hey, it's no problem! This is a subject I tend to do well in and I came in with some prior experience"
+    MC "Here is you notebook back. I owe you one!"
+    unknown "Nah, don't worry about it"
+
+    "Thank goodness that guy was there! If he wasn't, I don't know what I would have done!"
+    hide chrisTemp
+    jump continueClassThree
+
+label chrisNotHelp:
+    "Is that guy talking to me?"
+    "Wait I don't have time for that, I need to solve the problem!"
+
+    professor "Your answer?"
+
+    MC "Uhhhh.. -12?"
+
+    professor "Hmm, not quite. It is actually 2b + 1."
+    professor "Does everyone see how to arrive at that answer? Lets go through again......."
+
+    show chris at topright
+    unknown "I was trying to help out since I solved it already, but I guess you didn't hear me"
+    MC "Oh no I'm sorry about that! I guess I was just panicking and was not thinking clearly"
+    unknown "That's alright! It happens to all of us."
+
+    hide chrisTemp
+    "Man, I really blew it. I missed out on the right answer and just ignored the person trying to help me"
+    "He doesn't seem upset or anything, but next time I guess I should just accept the help"
+
+    jump continueClassThree
+
+label godHelpsMaybeLol:
+    "..GOD? Is that you???"
+    "Please, give me the answer!"
+
+    "..........."
+    ".............."
+
+    "but it failed!"
+
+    professor "Your answer?"
+
+    MC "It's still coming to me... hopefully?"
+
+    professor "Well, for the rest of us, the answer is 2b + 1."
+    professor "Now, how did we arrive at that?........"
+
+    show chrisTemp at topright
+    unknown "Hey, I was trying to help you out but you just... looked up suddenly?"
+    MC "You were? I thought it might have been divine intervention"
+    unknown "Well, not divine, but there was an attempt!"
+    MC "Sorry about that..."
+
+    hide chrisTemp
+    "Oh man, this went wrong in so many ways"
+    "That guy seems kind of annoyed that I waited for more help, even though he offered some to me"
+
+    jump continueClassThree
+
+## END OF CLASS THREE AND INTO FOUR
+label continueClassThree:
+    "Thank goodness this class is almost over, I just can't wait to wrap up the day and grab some food"
+    "Thankfully the next class is art, so it should be pretty fun!"
+    stop music
+    play music "audio/blueDream.mp3"
+    with fade
+    scene schoolPathTemp:
+        zoom 3
+    "Let's see, the art building is just down the sidewalk.."
+
+    with fade
+    scene classroomTemp
+    play music "audio/sandCastle.mp3"
+    "Wow, this classroom is already pretty packed! I guess this class is pretty popular"
+
+    "Looks like there's an empty seat there.."
+
+    with fade
+    professor "Hello everyone! Weclome to Art History!"
+    professor "I hope you all brought a laptop or phone, because today we will need them for a quick pre-course survey"
+    professor "If not, it's alright! Please just make sure you take the survey on your own time before we next meet."
+
+    "Good thing I packed my laptop, guess I will just get it out now"
+
+    with fade
+
+    show rasmeyTemp at topright
+    unknown "Oh dang, thats a nice laptop! Do you ever play games with it?"
+    "Looks like we got another PC gamer, just like that guy from English"
+    MC "Hey thanks. Yeah, I do play games from time to time"
+    unknown "It definitely looks like your laptop could handle whatever you throw at it"
+    MC "I did end up splurging a bit since I needed something good for school"
+    MC "Although I feel like I am paying the price for that now.."
+    "Man I am so hungry, please McReynolds come faster!"
+    unknown "YO WHAT IS THAT BY YOUR BACKPACK???"
+    MC "wait whAT WHAT IS IT???"
+    unknown "SOME KIND OF BUG!!"
+    MC "WAAAAAAh!!!"
+
+    "OH GOD I GOT SO SCARED I JUMPED!!"
+    menu:
+        "Fall to the side where there's open ground":
+            jump softFall
+        "Try to catch yourself in midair":
+            $ rasmey_rp -= 1
+            jump hardFall
+        "Hope that someone catches you!":
+            $ rasmey_rp += 1
+            jump rasmeyHelp
+
+label softFall:
+    "Oh my god that hurt, I hope that bug is gone..."
+    unknown "Are you alright??"
+    MC "Yeah, I'm alright. Thanks for warning me about that bug. I totally panicked!"
+    "Man that was so embarrasing.."
+    jump classFourContine
+
+label hardFall:
+    "WAIT, HOW DOES ONE CATCH THEMSELVES??"
+    unknown "Watch out!!"
+    unknwon "Ouch!"
+    MC "Oh my god I am so sorry! I did not mean to crash into you like that!"
+    unknwon "That's alright... I know that bug was straight up terrifying"
+    MC "Hopefully it's gone now.."
+    "Oh my god I can't believe I just jumped onto this guy out of fear"
+    "I hope he doesn't hate me now"
+    jump classFourContinue
+
+label rasmeyHelp:
+    MC "Help!!!"
+    unknown "I've got you, hang on!!"
+
+    "I WAS ACTUALLY SAVED??"
+    MC "You caught me"
+    unknown "That bug won't get the best of us"
+    unknown "I'm just glad you didn't hurt yourself, it could have been a lot worse"
+    MC "Thank you so much... but you can put me down now"
+    unknown "Oh yeah xD"
+
+    MC "Thanks again for the help.."
+
+    "Wow, I cannot believe that just happened"
+    jump classFourContinue
+
+label classFourContinue:
+    ".."
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
