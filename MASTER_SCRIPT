@@ -252,13 +252,13 @@ label secondClass:
     "Man this class really drags on."
     qMark "*Rapid clicking*"
     "What's that noise?"
-    I "Heyo"
+    unknown "Heyo"
     show ihrazTemp at right
     with fade
-    I "Could you plug in my laptop charge? The outlet is behind you."
-    I "I need it for class ;^)"
+    unknown "Could you plug in my laptop charge? The outlet is behind you."
+    unknown "I need it for class ;^)"
     MC "Oh, well I just plugged my phone in and it was about to die."
-    I "Only for a few minutes, I really need it for this thing."
+    unknown "Only for a few minutes, I really need it for this thing."
 
     stop music fadeout 1.0
     menu:
@@ -274,17 +274,17 @@ label secondClass:
             jump ihrazDayOneHelpful
 
 label ihrazDayOneRejected:
-    I "Coulda just said no fam."
+    unknown "Coulda just said no fam."
     jump ihrazDayOneContinue
 
 label ihrazDayOneNeutral:
-    I "RIP Ok that's fair, just lemme know."
+    unknown "RIP Ok that's fair, just lemme know."
     jump ihrazDayOneContinue
 
 label ihrazDayOneHelpful:
-    I "Thanks, I'll win this for you ;)"
+    unknown "Thanks, I'll win this for you ;)"
     "Win? I thought he was doing notes."
-    I "*clicks intensify*"
+    unknown "*clicks intensify*"
     "What is he doing, lemme look."
     show gogTemp at top
     with fade
@@ -292,7 +292,7 @@ label ihrazDayOneHelpful:
     "Is this something he usually does?"
     hide gogTemp
     MC "Soooo how's it coming?"
-    I "I'm about to win, thanks for the help!"
+    unknown "I'm about to win, thanks for the help!"
     MC "That's... nice. No problem I guess."
     jump ihrazDayOneContinue
     
