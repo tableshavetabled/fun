@@ -1,0 +1,1142 @@
+ # declare characters used in the game
+define MC = Character("Me", color="#0004ff")
+define S = Character("Sunny", color="#005500")
+define I = Character("Ihraz", color="#aa0000")
+define R = Character("Rasmey", color="#550000")
+define C = Character("Chris", color="#005500")
+define All = Character("All")
+define dejected = Character("Dejected Student")
+define professor = Character("Professor")
+define unknown = Character("?")
+define mcrEmp = Character("McReynold's Employee")
+
+
+# background images
+image darkRoomTemp = "darkRoomTemp.jpg"
+image bedroomTemp = "bedroomTemp.jpg"
+image schoolPathTemp = "schoolPathTemp.jpg"
+image classroomTemp = "classroomTemp.jpg"
+image gogTemp = "gogTemp.png"
+image diningHallTemp = "diningHallTemp.jpg"
+image nightStreetTemp = "nightStreetTemp.jpg"
+image mcrTemp = "mcrTemp.png"
+image geassTemp = "geassTemp.png"
+
+# character images
+image chrisTemp = "chrisTemp.jpg"
+image ihrazTemp = "ihrazTemp.jpg"
+image sunnyTemp = "sunnyTemp.jpg"
+image rasmeyTemp = "rasmeyTemp.jpg"
+image dejectedGuyTemp = "dejectedGuyTemp.jpg"
+image emptyWallet = "emptyWallet.jpg"
+
+
+###############################################################
+###################### EXAMPLE MENU ###########################
+# menu:
+#      "What should I do?"
+#
+#      "Drink coffee.":
+#          "I drink the coffee, and it's good to the last drop."
+#
+#      "Drink tea.":
+#          $ drank_tea = True
+#
+#          "I drink the tea, trying not to make a political statement as I do."
+#
+#      "Genuflect.":
+#          jump genuflect_ending
+#
+# label after_menu:
+#
+#      "After having my drink, I got on with my morning."
+##############################################################
+##############################################################
+
+
+
+########################################################
+########################################################
+########################################################
+### INTRO
+label start:
+    # relationship points and variables
+    $ sunny_rp = 0
+    $ ihraz_rp = 0
+    $ chris_rp = 0
+    $ rasmey_rp = 0
+    $ plug = 0
+    $ rasmeyCatch = 0
+    $ chrisHelp = 0
+    $ sunnyHelp = 0
+    $ pp = 0
+    $ mc_name = renpy.input("What is your name? (Type and press Enter)")
+    $ mc_name = mc_name.strip()
+    "Welcome to the game, %(mc_name)s!"
+    # MC "im %(mc_name)s"
+
+    play music ominous
+    scene darkRoomTemp:
+        zoom 3
+
+    show chrisTemp at top:
+        zoom 0.4
+    with fade
+    unknown "We need a new member for our operation."
+
+    hide chrisTemp
+    show ihrazTemp at top
+    with fade
+
+    unknown "You can’t trust just anybody."
+
+    hide ihrazTemp
+    show rasmeyTemp at top
+    with fade
+
+    unknown "We’re at a critical point."
+
+    hide rasmeyTemp
+    show sunnyTemp at top
+    with fade
+
+    unknown "This is the make or break moment."
+
+    hide sunnyTemp
+    with fade
+
+    unknown "...years in the making…"
+    unknown "...matter of life and death…"
+
+    unknown "..."
+
+    stop music fadeout 1.0
+
+########################################################
+########################################################
+########################################################
+### BEDROOM
+    scene bedroomTemp
+    with dissolve
+
+    play sound "audio/alarmClock.mp3"
+    with fade
+    "...uggghhhhh..."
+    "...make it stop."
+    stop sound
+    play music "audio/mourningDove.mp3"
+    with fade
+
+    "Well, the day is finally here. My first day of classes!"
+    "I really couldn't sleep last night much though..."
+    "Guess I have been feeling a bit anxious about starting school since I don't know anyone here yet."
+    "...well, guess I had better get ready to go!"
+    stop music fadeout 4.0
+
+########################################################
+########################################################
+########################################################
+### WALKING ON CAMPUS
+    scene schoolPathTemp:
+        zoom 3
+
+    play music "audio/blueDream.mp3"
+    "Campus in the fall sure is beautiful!"
+    "Ahhh, I can almost smell my success!"
+
+    ## DEJECTED GUY
+    show dejectedGuyTemp at top:
+        zoom 0.5
+    with fade
+    dejected "..urrehaaaaghhhhhh..."
+
+    hide dejectedGuyTemp
+    with fade
+
+    "...but these students reek of desperation! OTL"
+    "Well, can't let that get me down! Time to head to History."
+    stop music fadeout 4.0
+
+########################################################
+########################################################
+########################################################
+### FIRST CLASS
+
+    play music "audio/sandCastle.mp3"
+    scene classroomTemp
+    "Wow, I can't believe I am finally in my first University class!"
+
+    with fade
+    professor "Welcome to your first day of classes!"
+    professor "I hope that we have a great semester together."
+    professor "As you all know, the syllabus for my class was sent out mid-summer."
+    professor "I am sure that you knew this was coming, but it's time for a brief syllabus quiz!"
+
+    with fade
+    "The Professor is giving us a quiz already??"
+    "Thank goodness I read the syllabus a few times over already..."
+    "I guess that being nervous and over-preparing pays off!"
+
+    professor "Please take a sheet and pass the rest down to those in your row."
+
+########################################################
+########################################################
+########################################################
+### CLASS 1 QUIZ
+    with fade
+    professor "Now that each of you have a quiz, please begin!"
+
+    "Okay, question one..."
+    "It seems like this will be easy!"
+
+    "But... this feeling..."
+    "Am I being... watched?"
+
+    stop music fadeout 1.0
+    play sound "audio/heavyBreathing.mp3"
+    show sunnyTemp at topright
+    with fade
+
+    unknown "hhhhhh"
+    unknown "hhhhhhhhh"
+
+    MC "..uhhh..."
+
+    unknown "Do you..."
+
+    MC "....yes?"
+
+    unknown "...know the answer to number 3?"
+
+########################################################
+########################################################
+########################################################
+### HELP SUNNY?
+    stop sound
+    menu:
+        "Bro, stop cheating.":
+            $ sunny_rp -= 1
+            $ sunnyHelp -= 1
+            unknown "*sad sniffles*"
+            "...why do I feel kind of bad now? ):"
+            "Still..."
+            jump sunnyDayOneContinue
+
+        "Uhhh.. no?":
+            $ sunny_rp += 1
+            jump sunnyDayOneNeutral
+            unknown "That's okay, I don't either."
+            "...yeah, I could tell..."
+            jump sunnyDayOneContinue
+
+        "Yeah, it was B.":
+            $ sunny_rp += 3
+            $ sunnyHelp += 1
+            unknown "You are a true pal (:"
+            "Well, I am glad he thinks so! I guess?"
+            jump sunnyDayOneContinue
+
+########################################################
+########################################################
+########################################################
+### CLASS 1 CONTINUE
+label sunnyDayOneContinue:
+    scene classroomTemp
+    "This guy seems like he could be a little trouble... I should turn around before I get in trouble"
+    "I kinda get the feeling that guy is still staring, though."
+    play music "audio/sandCastle.mp3"
+
+    with fade
+    professor "Alright, that's time! Everyone please drop your quizzes at my desk on your way out!"
+
+    "That quiz seemed to go well, even with that... interesting encounter!"
+
+    with fade
+
+    "Looks like class is just about over."
+    "I have to head to English next."
+    "Guess I will start heading over!"
+
+########################################################
+########################################################
+########################################################
+### WALK TO CLASS 2
+    play music "audio/blueDream.mp3"
+    scene schoolPathTemp:
+        zoom 3
+    with fade
+    "Ok... English next."
+    "The building should be somewhere around here."
+    "I've got a few minutes to get there."
+    "Oh man, my phone is about to die."
+    stop music
+
+########################################################
+########################################################
+########################################################
+### CLASS 2 START
+    scene classroomTemp
+    with fade
+    play music "audio/sandCastle.mp3"
+    "I'll sit in the back where there's an outlet so I can charge it."
+    "..."
+    "...."
+    with fade
+    "Man this class really drags on."
+    unknown "*Rapid clicking*"
+    "What's that noise?"
+    unknown "Heyo"
+    show ihrazTemp at topright
+    with fade
+    unknown "Could you plug in my laptop charge? The outlet is behind you."
+    unknown "I need it for class ;^)"
+    MC "Oh, well I just plugged my phone in and it was about to die."
+    unknown "Only for a few minutes, I really need it for this thing."
+
+
+########################################################
+########################################################
+########################################################
+### HELP IHRAZ??
+    menu:
+        "Its English class, and the professor said no laptops.":
+            $ ihraz_rp -= 1
+            unknown "Coulda just said no fam."
+            jump ihrazDayOneContinue
+
+        "Sorry man, my phone is about to die, I'll let you use it after though.":
+            $ ihraz_rp += 1
+            unknown "RIP Ok that's fair, just lemme know."
+            jump ihrazDayOneContinue
+
+        "Sure, but just until you're done with whatever.":
+            $ ihraz_rp += 3
+            $ plug += 1
+            unknown "Thanks, I'll win this for you ;)"
+            "Win? I thought he was doing notes."
+            unknown "*clicks intensify*"
+            "What is he doing, lemme look."
+            show gogTemp at top
+            with fade
+            "Is this guy playing Gang of Gods? In class?"
+            "Is this something he usually does?"
+            hide gogTemp
+            with fade
+            MC "Soooo how's it coming?"
+            unknown "I'm about to win, thanks for the help!"
+            MC "That's... nice. No problem I guess!"
+            jump ihrazDayOneContinue
+
+########################################################
+########################################################
+########################################################
+### CLASS 2 CONTINUE
+label ihrazDayOneContinue:
+    "As boring as this class is, I should just try to pay attention."
+    "Thankfully it is almost over though. Just a bit longer..."
+    with fade
+    "Finally, class is ending!"
+    "I have a good bit of time before my next class starts."
+    "I guess I will check out the dining hall!"
+
+    stop music
+
+########################################################
+########################################################
+########################################################
+### WALK TO CAFETERIA
+    scene schoolPathTemp:
+        zoom 3
+    with fade
+    play music "audio/blueDream.mp3"
+    "Man, those two guys in my classes today really caught me off guard."
+    "The first guy was pretty... friendly? If not a bit weird."
+
+    if plug > 0:
+        "And that second guy... I wonder if he always plays games in class like that"
+        "If I did that I bet my grades would slip beyound salvation."
+        "Honestly, it's kind of impressive."
+    else:
+        "And that second guy, I wonder why he was clicking so rapidly"
+
+    "Neither of them seem all that studious, but they must be pretty good at school if they made it here"
+
+########################################################
+########################################################
+########################################################
+### DINING HALL
+    scene diningHallTemp:
+        zoom 3
+    with fade
+    "Wow, this place looks pretty nice!"
+    "...but wow, I was not expecting the prices to be this steep."
+    "I mean, a salad for $15.00?? It's like just having to pay tuition wasn't enough.."
+    "On top of that, I have my rent to worry about too."
+    show emptyWallet
+    with fade
+
+    "You know, it might be a good idea to start looking for alternatives..."
+    hide emptyWallet
+    with fade
+
+    "Time to hit up Yalp!"
+    "Oh, there's a McReynold's right across the street from campus!"
+    "I think I may have seen it before."
+    "It doesn't seem like there's enough time to walk there and back before my next class, though."
+    "Guess I will hold off until dinner."
+
+########################################################
+########################################################
+########################################################
+### WALK TO CLASS 3
+    scene schoolPathTemp:
+        zoom 3
+    with fade
+    "Time to head to math!"
+    "I have never been that great at math, but thankfully I won't need to take too many classes while I'm here."
+
+    stop music
+    play music "audio/sandCastle.mp3"
+
+########################################################
+########################################################
+########################################################
+### CLASS 3
+    scene classroomTemp
+    with fade
+
+    "Well, here we are!"
+    "I guess I am here a bit early since I was in a rush to leave the dining hall."
+    "Guess I will just relax a bit..."
+    "Oh man, I suddenly can't stop thinking about how hungry I am!"
+    "Hopefully I can get through these next two classes quickly..."
+    "Oh, here come's the professor. I need to try to pay attention."
+
+    professor "Good afternoon! I hope you all have had an enlightening first day so far."
+    professor "And if not, we will fix that now!"
+    professor "I prefer to just jump right into things, so let's get started!"
+    professor "Today we will be covering........"
+
+    "Oh man, I somehow feel like my ability to concentrate is gone."
+    "That's the last time I skip out on lunch..."
+    "I really need to be better about preparing."
+    with fade
+
+    professor "....so that problem was pretty straightforward with the use of the formula, right?"
+    "I could hardly follow that at all."
+    "......"
+    with fade
+
+    professor "...and that is how we can derive the answer!"
+    professor "I know it is only our first day of class together, but we really have no time to lose!"
+    professor "Let's see if you have been keeping up."
+    professor "You there - can you solve this problem on the board?"
+    professor "It should be simple if you follow the logic of the last example we did together."
+
+    "Oh my god, of all the times to be picked on for a quiz!!"
+    "What am I going to do?"
+
+    unknown "psssssst"
+    unknown "hey, on your right!"
+
+########################################################
+########################################################
+########################################################
+### CHRIS HELP
+    menu:
+        "Look right for help.":
+            $ chris_rp += 3
+            $ chrisHelp += 1
+            show chrisTemp at topright
+            "Here, use this!"
+            "Wow, it looks like this guy already solved the problem in his notebook!"
+            MC "Uhhh.. 2b + 1?"
+            professor "That's correct! See? These problems aren't so bad."
+            "I WAS SAVED!!"
+            MC "Thanks so much for helping me out there, I have been feeling really distracted."
+            unknown "Hey, it's no problem! This is a subject I tend to do well in and I came in with some prior experience."
+            MC "Here is you notebook back. I owe you one!"
+            unknown "Nah, don't worry about it."
+            "Thank goodness that guy was there! If he wasn't, I don't know what I would have done!"
+            hide chrisTemp
+            jump continueClassThree
+
+        "Look left for help.":
+            $ chris_rp += 1
+            "Is that guy talking to me?"
+            "Wait I don't have time for that, I need to solve the problem!"
+            professor "Your answer?"
+            MC "Uhhhh.. -12?"
+            professor "Hmm, not quite. It is actually 2b + 1."
+            professor "Does everyone see how to arrive at that answer? Lets go through again......."
+            show chrisTemp at topright
+            unknown "I was trying to help out since I solved it already, but I guess you didn't hear me."
+            MC "Oh no I'm sorry about that! I guess I was just panicking and was not thinking clearly."
+            unknown "That's alright! It happens to all of us."
+            hide chrisTemp
+            "Man, I really blew it. I missed out on the right answer and just ignored the person trying to help me."
+            "He doesn't seem upset or anything, but next time I guess I should just accept the help."
+            jump continueClassThree
+
+        "Look up to God for help.":
+            $ chris_rp -= 1
+            "..GOD? Is that you???"
+            "Please, give me the answer!"
+            "..........."
+            ".............."
+            "but it failed!"
+            professor "Your answer?"
+            MC "It's still coming to me... hopefully?"
+            professor "Well, for the rest of us, the answer is 2b + 1."
+            professor "Now, how did we arrive at that?........"
+            show chrisTemp at topright
+            unknown "Hey, I was trying to help you out but you just... looked up suddenly?"
+            MC "You were? I thought it might have been divine intervention."
+            unknown "Well, not divine, but there was an attempt!"
+            MC "Sorry about that..."
+            hide chrisTemp
+            "Oh man, this went wrong in so many ways."
+            "That guy seems kind of annoyed that I waited for more help, even though he offered some to me."
+            jump continueClassThree
+
+
+########################################################
+########################################################
+########################################################
+### CONTINUE CLASS 3
+label continueClassThree:
+    "Thank goodness this class is almost over, I just can't wait to wrap up the day and grab some food."
+    "Thankfully the next class is art, so it should be pretty fun!"
+    stop music
+    play music "audio/blueDream.mp3"
+
+########################################################
+########################################################
+########################################################
+### WALK TO CLASS 4
+    scene schoolPathTemp:
+        zoom 3
+    with fade
+    "Let's see, the art building is just down the sidewalk.."
+
+########################################################
+########################################################
+########################################################
+### CLASS 4
+    scene classroomTemp
+    with fade
+    play music "audio/sandCastle.mp3"
+    "Wow, this classroom is already pretty packed! I guess this class is pretty popular."
+    "Looks like there's an empty seat there.."
+    with fade
+
+    professor "Hello everyone! Weclome to Art History!"
+    professor "I hope you all brought a laptop or phone, because today we will need them for a quick pre-course survey."
+    professor "If not, it's alright! Please just make sure you take the survey on your own time before we next meet."
+
+    "Good thing I packed my laptop, guess I will just get it out now."
+
+    show rasmeyTemp at topright
+    with fade
+    unknown "Oh dang, thats a nice laptop! Do you ever play games with it?"
+
+    if plug > 0:
+        "Looks like we got another PC gamer, just like that guy from English."
+    elif plug == 0:
+        pass
+
+    MC "Hey thanks. Yeah, I do play games from time to time."
+    unknown "It definitely looks like your laptop could handle whatever you throw at it."
+    MC "I did end up splurging a bit since I needed something good for school."
+    MC "Although I feel like I am paying the price for that now.."
+    "Man I am so hungry, please McReynolds come faster!"
+    unknown "YO WHAT IS THAT BY YOUR BACKPACK???"
+    MC "wait whAT WHAT IS IT???"
+    unknown "SOME KIND OF BUG!!"
+    MC "WAAAAAAh!!!"
+
+########################################################
+########################################################
+########################################################
+### RASMEY HELP
+    "OH GOD I GOT SO SCARED I JUMPED!!"
+    menu:
+        "Fall to the side where there's open ground.":
+            $ rasmey_rp += 1
+            "Oh my god that hurt, I hope that bug is gone..."
+            unknown "Are you alright??"
+            MC "Yeah, I'm alright. Thanks for warning me about that bug. I totally panicked!"
+            "Man that was so embarrasing.."
+            jump toMcr
+
+        "Try to catch yourself in midair.":
+            $ rasmey_rp -= 1
+            $ rasmeyCatch -= 1
+            "WAIT, HOW DOES ONE CATCH THEMSELVES??"
+            unknown "Watch out!!"
+            unknown "Ouch!"
+            MC "Oh my god I am so sorry! I did not mean to crash into you like that!"
+            unknown "That's alright... I know that bug was straight up terrifying."
+            MC "Hopefully it's gone now.."
+            "Oh my god I can't believe I just jumped onto this guy out of fear."
+            "I hope he doesn't hate me now."
+            jump toMcr
+
+        "Hope that someone catches you!":
+            $ rasmey_rp += 3
+            $ rasmeyCatch += 1
+            MC "Help!!!"
+            unknown "I've got you, hang on!!"
+            "I WAS ACTUALLY SAVED??"
+            MC "You caught me!"
+            unknown "That bug won't get the best of us."
+            unknown "I'm just glad you didn't hurt yourself, it could have been a lot worse"
+            MC "Thank you so much... but you can put me down now."
+            unknown "Oh yeah xD"
+            MC "Thanks again for the help.."
+            "Wow, I cannot believe that just happened..."
+            jump toMcr
+
+########################################################
+########################################################
+########################################################
+### GO TO MCR
+label toMcr:
+    "I'm just going to keep my head down for the rest of the day."
+    "I have the worst luck."
+    "Although now I can finally EAT! To McReynolds I go."
+    scene nightStreetTemp
+    with fade
+    stop music
+    play music "audio/blueDream.mp3"
+    "It's actually so nice out right now."
+    "But man am I hungry. Luckily it's right across the street from campus."
+    "On the bright side, classes weren't so bad. And there were some interesting people too..."
+    "I can't believe that one professor gave a pop quiz on the first day. At least I was prepared."
+
+    if plug > 0:
+        "Then in English I wasn't really able to charge my phone."
+    elif plug == 0:
+        "Then in English I was finally able to charge my phone."
+
+    "And then I zoned off in class, which was embarrassing..."
+
+    if rasmeyCatch > 0:
+        "And to top it all off, I had to fall and be saved."
+    elif plug == 0:
+        "And to top it all off, I had to fall down and hurt myself."
+
+    "On the bright side, I am pretty happy that there are some interesting people in my classes."
+    "When I decided to go to school out of state I knew i would be on my own, so i'm going to have to get along with new people."
+    "I heard you can make friends through dorming, but since I am in my own off campus apartment it will be a bit harder for me."
+    "Next time I meet those guys from my classes, I hope I can get along with them!"
+
+########################################################
+########################################################
+########################################################
+### ARRIVE AT MCR + FLASHBACK
+    stop music fadeout 2
+    scene mcrTemp
+    with fade
+    play sound "audio/shopJingleTemp.mp3"
+    "Time to see what my leftover cash can get me."
+
+    play music ominous
+    # change scene to dark version of mcr:
+
+    show chrisTemp at top:
+        zoom 0.4
+    with fade
+    unknown "We need a new member for our operation."
+    hide chrisTemp
+
+    show ihrazTemp at top
+    with fade
+    unknown "You can’t trust just anybody."
+    hide ihrazTemp
+
+    show rasmeyTemp at top
+    with fade
+    unknown "We’re at a critical point."
+    hide rasmeyTemp
+
+    show sunnyTemp at top
+    with fade
+    unknown "This is the make or break moment."
+    hide sunnyTemp
+    with fade
+
+    unknown "...years in the making…"
+    unknown "...matter of life and death…"
+    unknown "..."
+
+    stop music fadeout 1.0
+    with dissolve
+
+    scene mcrTemp
+    with fade
+    "Hey I know those voices!"
+    "...also what's with this feeling of deja vu?"
+
+########################################################
+########################################################
+########################################################
+### COOKIES
+    show chrisTemp
+    unknown "I don’t think we are going to find a solution right now, guys."
+    unknown "So in the meantime, I think we have another important thing to address..."
+    hide chrisTemp
+
+    show rasmeyTemp
+    unknown "oh yea, sunny I think its your turn to do the honors?"
+    hide rasmeyTemp
+
+    show ihrazTemp
+    unknown "Hold on, I thought it was my turn?"
+    hide ihrazTemp
+
+    # Show conforntation picture between ihraz/sunny as scene
+    # with fade
+
+    show sunnyTemp
+    unknown "The responsibility is mine."
+    hide sunnyTemp
+
+    show ihrazTemp
+    unknown "Then we have a problem Sunny."
+    unknown "I'm getting the cookies this time."
+    hide ihrazTemp
+
+    scene mcrTemp
+    "hey it's some of the people I ran into today."
+    "Guess something's going on there, involving... cookies?"
+
+########################################################
+########################################################
+########################################################
+### APPROACH THE GUYS?
+
+    # Keep this one as a menu since there is a bad ending here!!
+    menu:
+        "Approach them":
+            jump approachGuys
+
+        "This makes no sense. Leave. THIS IS GAME OVER":
+        #remove that shit later
+            "small pp move"
+            return
+
+########################################################
+########################################################
+########################################################
+### WAIT, I KNOW YOU ALL??
+    show chrisTemp at right
+    unknown "Hey, you were in my class earlier today!"
+
+    if chrisHelp > 0:
+        unknown "I helped you out with that math problem."
+    elif plug == 0:
+        unknown "The professor called on you that one time, right?"
+    hide chrisTemp
+
+    show ihrazTemp at right
+    unknown "You know this person too? They were also in my class!"
+
+    if plug > 0:
+        unknown "He plugged in my laptop so I could win my game."
+    elif plug == 0:
+        unknown "You were charging your phone or something."
+    hide ihrazTemp
+
+    show rasmeyTemp at right
+    unknown "We got pretty well acquainted too."
+
+    if rasmeyCatch > 0:
+        unknown "Fell right into my arms actually."
+    elif rasmeyCatch == 0:
+        unknown "Or rather, you got well acquainted with the floor."
+    elif rasmeyCatch < 0:
+        unknown "Or rather, the both of us got acquainted with the floor."
+    hide rasmeyTemp
+
+    show sunnyTemp at right
+
+    if sunnyHelp > 0:
+        unknown "Yea I feel like we got pretty... *close*."
+        unknown "We're already friends already."
+    elif sunnyHelp == 0:
+        unknown "Yea I feel like we got pretty... *close* already."
+        unknown "We both struggled with our quizzes."
+    elif sunnyHelp < 0:
+        unknown "*sniffle* yea... I know him."
+    hide sunnyTemp
+
+    MC "I can't believe you all know each other and are all here!"
+
+########################################################
+########################################################
+########################################################
+### FIRST NAME BASIS! + Cookie explain
+    I "I don't think we've introduced ourselves. I'm Ihraz."
+    C "I'm Chris."
+    R "I'm Rasmey."
+    if sunnyHelp < 0:
+        S "*sniffle*"
+        R "And that's Sunny, sniffling."
+    else:
+        S "Sunny here."
+
+    MC "You can call me %(mc_name)s!"
+    MC "I overheard your cookie convo and realized it was you all."
+    MC "Is this like a regular thing you guys do?"
+    I "Yea we call it McReynolds Mondays. After a hard day of classes, its nice to get some low effort grub with the bros"
+    C "We always take turns buying cookies for each other but we don’t remember whose turn it is this week"
+    R "We get a baker’s dozen for like, 3 dollars. And it’s supposed to be sunny’s turn as far as I remember."
+    C "Ihraz says that he wants to do it this week though"
+    C "Cookie issues aside, did you want to sit with us? Since I guess we all know you, it would be fun to get to know each other"
+    mcrEmp "Order 69!"
+    MC "Thats my order, lemme grab my food"
+    S "hey if ur going up anyways, would you mind getting the cookies, *friend*?"
+
+
+########################################################
+########################################################
+########################################################
+### MC BUYS COOKIES OR ELSE + WISH EXPLAIN
+    scene geassTemp
+    with fade
+    scene mcrTemp
+    with fade
+
+    MC "uhh.. sure .. yea i can do that"
+    "well I did want to make new friends…"
+    C "Thanks for grabbing the cookies! You really didn’t have to do it"
+    S "This pleases me"
+    R "Here, we pulled up a seat for you while you were gone!"
+    I "ok but now that youre here, help us out. Sunny had an interesting question"
+    S "yea. Basically, like, what wish would you wish for, if you had a genie lamp that only granted one wish"
+
+########################################################
+########################################################
+########################################################
+### IHRAZ WISH
+    I "Well, I would wish to know everything in the world."
+    C "I feel like that would be such a heavy burden, are you sure you just want to have total awareness of everything all the time?"
+    I "yea man, i want to be the smartest mofo out there"
+    C "It may become too much to handle with all the information going through your brain."
+    R "Yea what if you knew someone was getting mugged, or every crime happening at once? That would be an overload of depressing… like my life"
+    I "ok fine, how about if I only knew what i WANTED to know, like a search engine or on command?"
+    S "Like Google?"
+    I "No like everything and completely accurately."
+
+    menu:
+        "I would rather know than not know, even if that means knowing everything.":
+            $ ihraz_rp += 1
+            I "Of course! And you can always choose what to know anyways."
+            jump iWishCont
+
+        "I don’t think I would want to be able to know everything. Seems kinda dangerous.":
+            I "Fair, fair."
+            jump iWishCont
+
+label iWishCont:
+    I "basically I want to change the world for the better. But there are a million projects out there, and theres no filter except whats trending at the time for what causes to join."
+    C "and youre saying that a perfect search engine could identify what you would want to work towards?"
+    I "yea, at least for the unselfish side of me"
+    R "now i have to ask… what about the selfish side?"
+    I "of course im gonna be able to know every answer for everything"
+    I "I’m gonna help me first"
+    S "mhmm mhmm"
+
+########################################################
+########################################################
+########################################################
+### RASMEY WISH
+    R "That’s a pretty awesome wish :0 mine is definitely a lot more simple, I’d just want infinite money in hand at all times"
+    C "I like the search engine idea. Seems more manageable. Also infinite money does sound nice..."
+    I "'absolute power corrupts absolutely'"
+    R "whats that supposed to mean?"
+    I "money aint you bro"
+    R "a guy can dream right?"
+    C "He might be able to do a lot of good with all that money, unlike some other billionaires I know.."
+    I "im just saying, would you even be the same person if you had infinite money?"
+    R "and im jus saying, money would solve literally every problem"
+
+    menu:
+        "Nothing wrong with wanting infinite money. And if it solves all your problems, go for it.":
+            $ rasmey_rp += 1
+            jump rWishCont
+
+        "Not having infinite money keeps almost every person humble to a degree. Infinite money might actually not be safe and even unsatisfactory":
+            jump rWishCont
+
+label rWishCont:
+    R "I gotta say, one thing I would definitely want to do would be to get an incredible gaming PC rig"
+    R "I would get the best setup possible, and maybe I would even hook you guys up with rigs to match mine (-; "
+    I "That’s a worthy goal if I have ever heard one, we would be able to run everything on ultra settings and probably still lose xD "
+    R "Hey man, at least we did it in style xD"
+    C "I like it man, you gotta treat yourself right?"
+    C "I mean, with infinite money, why not go all out on the things you love"
+    I "I still think there is definitely such thing as having too much money though. Like I said, absolute power corrupts absolutely"
+    C "What if we capped the money at one hundred million. Then you would have a fixed upper limit to what you could spend or donate and would have to more selective about what you did with it"
+    R "Okay okay, I like it I like it"
+    I "While that is less than infinity, I will say that is still a fk ton of money, so I think you could solve a lot of problems if you did it wisely"
+    S "That’s a lot of popeyes chicken sandwiches man mm mm  mm"
+    S "lip smack * 3"
+    S "damn damn damn. If I had infinite money. I would go hunting for nessie with big ass harpoons and Oreos."
+    R "why do you think that Nessie would want Oreos?"
+    S "I saw it in a movie that Nessie likes Oreos so I gotta try it out man"
+    I "If you saw it in the movie then that checks out I guess"
+    S "Ye ye ye. Don’t knock it til you try it my brotha"
+
+########################################################
+########################################################
+########################################################
+### SUNNY WISH
+    S "But I already thought of something better already. If I had a genie, I would wish that wherever I go, I would always be treated as a guest."
+    I "ok what does that mean?"
+
+    menu:
+        "Well, he could go to any place or approach any person, and always be welcome, even like the white house or the pope":
+            S "No no no, thats not what i meant. I meant I could take anything I want, cuz I'm a guest right?"
+            jump sWishCont
+
+        "That could mean you have access to anything. As a guest, you could have whatever you want just by taking it. No need for infinite money.":
+            $ sunny_rp += 1
+            S "Yeyeye exactly! If you're a guest, like, you can literally just take whatever you want!"
+            jump sWishCont
+
+label sWishCont:
+    R "... I feel like that isn’t how it really works…"
+    I "Sunny, no, how does that even make any sense"
+    C "just cuz ur a guest doesn't mean you can steal whatever you want, you’ll get in trouble"
+    S "but im a guest!"
+    I "Yea and guests can get kicked out too, it doesn’t grant you permanent diplomatic immunity for everything"
+    C "Just try not to steal, buddy, I think you will be in the clear"
+
+########################################################
+########################################################
+########################################################
+### CHRIS WISH
+    C "But I think that if it was me, I would make it so that no matter where I go in the world, I would always have a place to live that I already own"
+    C "Like for example, if I traveled to Germany or Japan, I would just show up and have a place to stay."
+    C "No matter where it is, I’ve always got some real estate"
+    I "Damn. I like it."
+    R "Yo that would be perfect bro, you could literally just bounce between places all the time and not have to worry about rent or anything, right?"
+    S "woowww infinite real estate huh. That means that I can be a guest at all of Chris’ houses"
+    C "Yes sunny, you don’t need a super power for that to be the case, though <3"
+    R "Can I come too? xD"
+    I "Where do you think you would spend the most time at though?"
+    C "Hmmm damn I think it would have to be somewhere really warm all the time, where it’s always summer and I can always have some sunshine."
+
+    menu:
+        "How about Hawaii?":
+            C "I mean, Hawaii would be fun to visit, but I was thinking Okinawa to be honest."
+            jump cWishCont
+
+        "Okinawa has good weather right?":
+            $ chris_rp += 1
+            C "Exactly, that's what I was thinking!"
+            jump cWishCont
+
+        "I hear the Bermuda Triangle is popping.":
+            C "That sounds like something up Sunny’s alley, but for me I would probably want to go to Okinawa."
+            jump cWishCont
+
+label cWishCont:
+    C "I hear it’s really nice, and the people have such a long average lifespan that I feel like it would be good for me"
+    R "Yo Okinawa would be nice, plus you would be so close to mainland Japan and the rest of Asia"
+    S "I would definitely come visit you there Chris"
+
+########################################################
+########################################################
+########################################################
+### MC WISH
+    I "Ok but what about you %(mc_name)s? What would you wish for?"
+
+    menu:
+        "I wish I had transportation whenever I wanted.":
+            $ chris_rp += 3
+            C "That sounds pretty handy, like if you needed a car there would always just be one for you?"
+            MC "Exactly. Depending on the situation, I would have a car, airplane, bike, boat, or any or type of transportation immediately available"
+            S "Danggg, I like it. I might leave the house more if I had a power like that."
+            R "Yo, that’s exactly what I was thinking! I would still need some kind of destination though"
+            C "If we combined our powers of infinite real estate and perpetually available travel, we could go anywhere in the world"
+            I "If you’re saying that you get free transportation at any time to any destination, then your two wishes would work really well together."
+            C "It would be a pretty great reason to travel since you would save on flights and everything else, not to mention places to stay."
+            C "You know, this conversation feels like it could be a great topic for the podcast"
+            jump askPod
+
+        "I wish I could master any skill.":
+            $ ihraz_rp += 3
+            I "oh thats really cool! Its like mine, but different."
+            MC "Yea but instead of knowledge, if i choose to master any skill and i try it, i automatically can do it."
+            C "thats actually super practical"
+            R "its kinda op"
+            S "yea you can be so successful in life"
+            MC "and i wont have the feds investigating me, ill just be a super lucky prodigy"
+            I "I like that a lot, but more importantly, that was a riveting conversation, we should consider putting that one on the podcast"
+            jump askPod
+
+        "I wish I could eat whatever I wanted, whenever.":
+            $ sunny_rp == 3
+            R "wait any food, anywhere? Sounds like a fantasy"
+            MC "Yea whatever food i feel like eating, i can have as much of it as i want, on command"
+            S "you know, i was thinking that too. Can you read my mind or something?"
+            C "what do you mean, you chose being a guest, and thatll be free food too"
+            S "yea but any food, anywhere?? For FREE?!"
+            S "*looks straight at MC*"
+            S "I would make you my best friend"
+            MC "and id be willing to share!"
+            S "dang this was a good topic, we shouldve saved it for the podcast"
+            jump askPod
+
+        "i wish I could automatically always have the newest phone or computer.":
+            $ rasmey_rp += 1
+            I "like a software update, but no waiting?"
+            MC "no, more like i wouldnt even have to buy the newest phone or graphics card, Id always be up to date"
+            R "Yoooo I love that, like you automatically just get buffed up to the newest tech all the time?"
+            I "Man, you could get the latest graphics cards and play Gang of Gods on ultra super mega settings"
+            S "Man, I would want to play some VR"
+            R "Even after buying the newest stuff, everything goes obsolete within a year or two. Man, I am starting to rethink my wish now xD"
+            I "its too late, you made your choice, and it just got beat"
+            R "Now that I think about it, what if we made these choices on the podcast? this would have been such a good topic, bois"
+            jump askPod
+
+########################################################
+########################################################
+########################################################
+### ASK ABOUT THE PODCAST + OLD PILOT LOL
+label askPod:
+    MC "Podcast?"
+    # Show visual of 4 of us witrh eyes glinting greedily as a scene
+    # play remake of pod intro with 4 of us
+    # scene mcrTemp
+    C "You ever walk into a McReynold's and order a kid's meal trying to fill that... void in your life?"
+    C "Well it's time to put that cheeseburger down and fill that void with us!"
+    S "I'm Sunny!"
+    I "I'm Ihraz!"
+    R "I'm Rasmey!"
+    C "And I'm Chris!"
+    C "And we are your hosts at The RecTable!"
+    I "We love telling stories and making each other laugh."
+    R "But also give advice, and learn new things along the way!"
+    S "So grab a seat, relax, and welcome to The RecTable!"
+
+    menu:
+        "OK what the fuck was that":
+            jump podExplain
+
+        "Aight imma head out.":
+            "That was fking weird and my sanity can only take so much"
+            #Visual: Shadow sunny with red eyes
+            S "who said you could leave"
+            S "youre one of us now"
+            All "one of us"
+            All "one of us!"
+            All "ONE OF US!"
+            MC "someone save me"
+            jump podExplain
+
+        "I don't know what just happened, but I kinda liked it?":
+            jump podExplain
+
+########################################################
+########################################################
+########################################################
+### EXPLAIN THE PODCAST
+label podExplain:
+    I "that was our intro!"
+    C "yea basically we have a pod, and its been going pretty well, but we recently ran into a problem"
+    R "thing is, we don't have a guest lined up for next week’s episode"
+    C "we usually have a wait list, but next week’s guest had to bail"
+    S "i mean we do fine by ourselves, but getting outside input always spices things up."
+    I "yea like that wish conversation we were just having, it definitely helped to have a fresh perspective available."
+    S "fresh cookies too"
+    R "Ahem! in any case, yes we're looking for a sub-in guest, but we’ve got quite a few episodes out already and i gotta say, they’re pretty good."
+    C "And it feels good to create, I never thought we’d come this far"
+
+    menu:
+        "That's pretty awesome, I want to more about this podcast.":
+            $ pp += 3
+            I "funny you should say that, we actually have an episode about our origin story"
+            C "its worth listening to, but i guess you could say this place right here was the birthplace of the idea"
+            MC "here? Like, the McReynolds?"
+            S "yup. Just like this, we’d hang out and have some interesting conversations, then one day we were like, hey why dont we record this?"
+            R "thats the short version, the origin story episode has the rest xD"
+            jump endDay1
+
+        "Congrats on starting a podcast, I hope it does well!":
+            $ pp += 1
+            C "thanks, we’re gonna be famous"
+            S "and rich, once we get to monetize"
+            I "we gotta get sponsors too for like ads"
+            R "true, true, all in good time"
+            jump endDay1
+
+        "Who listens to podcasts though? They're kinda lame:/":
+            $ pp -= 1
+            R "slightly uncalled for"
+            I "to each their own i guess"
+            S "what? A lot of people listen to podcasts!"
+            C "i know i do, pretty regularly actually. Might hit up our latest one on the drive home"
+            R "oh i still have to finish that one, sunny’s stories are wilddd"
+            jump endDay1
+
+########################################################
+########################################################
+########################################################
+### END OF DAY 1!!!!
+label endDay1:
+    R "but for now, i gotta head out guys, i gotta get up early tomorrow"
+    C "yea me too. I guess we’ll see you around too, in class and here too if u want"
+    S "cookies on us next time"
+    MC "that was pretty fun, i wouldnt mind doing it again"
+    MC "see you guys later"
+    I "ill give u a ride to ur car sunny"
+    S "thank you thank you"
+
+    #add visuals / scenes for getting home
+    #reflection time
+    "Well, I don’t think anything could have prepared me for that!"
+    "I feel like none of the people in my old town would have conversations like that"
+    "but these guys vibe together while being so… vastly different"
+    "Sunny is such a unique guy by any standard, and it feels like he has such a strong energy"
+    "It almost feels like no matter how I would feel in a moment with him, that feeling would get turned up to 10"
+    "and he clearly knows ways of getting what he wants"
+    "On the other hand, chris seemed to have a thoughtful and practical approach to his wishes"
+    "He also tried to help me earlier today with the pop quiz, so it seems like he is the type to lend a hand when people need it"
+    "I feel like there is more to Rasmey than he lets on, like on the surface he may say something, but doesn’t fully say what he thinks or feels"
+    "It’s kind of like his wish.. He wanted infinite money, which on the surface didn’t reveal much about him, but I get the feeling that the reasons behind it run deep"
+    "Ihraz seems to have a humanitarian streak to him, with his goal of helping the world out"
+    "I think that he might embody the belief that knowledge is power, and he seems the ambitious type. Let’s just hope he uses that power for good"
+    "it was nice of them to want to know me and ask about my wish too, it felt pretty inclusive."
+    "Even though I just met those guys today, it felt like we connected well"
+    "We got along pretty well, and their podcast intro was definitely… intriguing"
+    "They mentioned that they need a guest for their next episode… I wonder who they will have on since their original guest bailed?"
+    "Well, in any case, I guess I had better get home and get ready for tomorrow"
+    "Hopefully I will run into those guys in class again!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return
