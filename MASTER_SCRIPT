@@ -730,6 +730,8 @@ label toMcr:
 ########################################################
 ########################################################
 ### WAIT, I KNOW YOU ALL??
+label approachGuys:
+
     show chrisTemp at right
     unknown "Hey, you were in my class earlier today!"
 
