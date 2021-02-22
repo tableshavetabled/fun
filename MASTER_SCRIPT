@@ -20,7 +20,7 @@ image gogTemp = "gogTemp.png"
 image diningHallTemp = "diningHallTemp.jpg"
 image nightStreetTemp = "nightStreetTemp.jpg"
 image mcrTemp = "mcrTemp.png"
-image geassTemp = "geassTemp.png"
+image geassTemp = "geassTemp.jpg"
 
 # character images
 image chrisTemp = "chrisTemp.jpg"
@@ -224,7 +224,7 @@ label start:
 
         "Uhhh.. no?":
             $ sunny_rp += 1
-            jump sunnyDayOneNeutral
+            jump sunnyDayOneContinue
             unknown "That's okay, I don't either."
             "...yeah, I could tell..."
             jump sunnyDayOneContinue
@@ -730,6 +730,7 @@ label toMcr:
 ########################################################
 ########################################################
 ### WAIT, I KNOW YOU ALL??
+label approachGuys:
     show chrisTemp at right
     unknown "Hey, you were in my class earlier today!"
 
