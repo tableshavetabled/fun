@@ -10,6 +10,9 @@ define professor = Character("Professor")
 define unknown = Character("?")
 define mcrEmp = Character("McReynold's Employee")
 
+#transition change
+define fastdissolve = Dissolve(0.2)
+
 
 # background images
 image darkRoomTemp = "darkRoomTemp.jpg"
@@ -21,6 +24,7 @@ image diningHallTemp = "diningHallTemp.jpg"
 image nightStreetTemp = "nightStreetTemp.jpg"
 image mcrTemp = "mcrTemp.png"
 image geassTemp = "geassTemp.jpg"
+image guysTemp = "guysTemp.jpg"
 
 # character images
 image chrisTemp = "chrisTemp.jpg"
@@ -29,6 +33,7 @@ image sunnyTemp = "sunnyTemp.jpg"
 image rasmeyTemp = "rasmeyTemp.jpg"
 image dejectedGuyTemp = "dejectedGuyTemp.jpg"
 image emptyWallet = "emptyWallet.jpg"
+image speechTemp = "speechTemp.png"
 
 
 ###############################################################
@@ -778,26 +783,59 @@ label approachGuys:
 ########################################################
 ########################################################
 ### FIRST NAME BASIS! + Cookie explain
+    show ihrazTemp at right
     I "I don't think we've introduced ourselves. I'm Ihraz."
+    hide ihrazTemp
+
+    show chrisTemp at right
     C "I'm Chris."
+    hide chrisTemp
+
+    show rasmeyTemp at right
     R "I'm Rasmey."
-    if sunnyHelp < 0:
+    hide rasmeyTemp
+
+    if sunnyHelp <0:
+        show sunnyTemp at right
         S "*sniffle*"
+        hide sunnyTemp
+
+        show rasmeyTemp at right
         R "And that's Sunny, sniffling."
+        hide rasmeyTemp
+
     else:
+        show sunnyTemp at right
         S "Sunny here."
+        hide sunnyTemp
 
     MC "You can call me %(mc_name)s!"
     MC "I overheard your cookie convo and realized it was you all."
     MC "Is this like a regular thing you guys do?"
+    
+    show ihrazTemp at right
     I "Yea we call it McReynolds Mondays. After a hard day of classes, its nice to get some low effort grub with the bros"
+    hide ihrazTemp
+    
+    show chrisTemp at right
     C "We always take turns buying cookies for each other but we don’t remember whose turn it is this week"
+    hide chrisTemp
+    
+    show rasmeyTemp at right
     R "We get a baker’s dozen for like, 3 dollars. And it’s supposed to be sunny’s turn as far as I remember."
+    hide rasmeyTemp
+
+    show chrisTemp at right
     C "Ihraz says that he wants to do it this week though"
     C "Cookie issues aside, did you want to sit with us? Since I guess we all know you, it would be fun to get to know each other"
+    hide chrisTemp
+    
     mcrEmp "Order 69!"
     MC "Thats my order, lemme grab my food"
+
+    show sunnyTemp at right
     S "hey if ur going up anyways, would you mind getting the cookies, *friend*?"
+    hide sunnyTemp
 
 
 ########################################################
@@ -811,57 +849,240 @@ label approachGuys:
 
     MC "uhh.. sure .. yea i can do that"
     "well I did want to make new friends…"
+    with fade
+    
+    show chrisTemp at right
     C "Thanks for grabbing the cookies! You really didn’t have to do it"
+    hide chrisTemp
+
+    show sunnyTemp at right
     S "This pleases me"
+    hide sunnyTemp
+
+    show rasmeyTemp at right
     R "Here, we pulled up a seat for you while you were gone!"
+    hide rasmeyTemp
+
+
+    scene guysTemp:
+        zoom .6
+    with fade
+########################################################
+# FOR THIS SCENE, ADD SPEECH BUBBLE OVER WHOS TALKING FOR EASE OF TRANSITION/CODING
+# AND TO MINIMIZE CONSTANT PICTURE SWITCHES ON THE VISUAL. 
+
+
+# Begin wish conversation
+
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "ok but now that youre here, help us out. Sunny had an interesting question"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "yea. Basically, like, what wish would you wish for, if you had a genie lamp that only granted one wish"
+    hide speechTemp with fastdissolve
 
 ########################################################
 ########################################################
 ########################################################
 ### IHRAZ WISH
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "Well, I would wish to know everything in the world."
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "I feel like that would be such a heavy burden, are you sure you just want to have total awareness of everything all the time?"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "yea man, i want to be the smartest mofo out there"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "It may become too much to handle with all the information going through your brain."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Yea what if you knew someone was getting mugged, or every crime happening at once? That would be an overload of depressing… like my life"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "ok fine, how about if I only knew what i WANTED to know, like a search engine or on command?"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "Like Google?"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "No like everything and completely accurately."
+    hide speechTemp with fastdissolve
 
     menu:
         "I would rather know than not know, even if that means knowing everything.":
             $ ihraz_rp += 1
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "Of course! And you can always choose what to know anyways."
+            hide speechTemp with fastdissolve
+
             jump iWishCont
 
         "I don’t think I would want to be able to know everything. Seems kinda dangerous.":
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "Fair, fair."
+            hide speechTemp with fastdissolve
+
             jump iWishCont
 
 label iWishCont:
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "basically I want to change the world for the better. But there are a million projects out there, and theres no filter except whats trending at the time for what causes to join."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "and youre saying that a perfect search engine could identify what you would want to work towards?"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "yea, at least for the unselfish side of me"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "now i have to ask… what about the selfish side?"
+    hide speechTemp with fastdissolve
+   
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "of course im gonna be able to know every answer for everything"
     I "I’m gonna help me first"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "mhmm mhmm"
+    hide speechTemp with fastdissolve
 
 ########################################################
 ########################################################
 ########################################################
 ### RASMEY WISH
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "That’s a pretty awesome wish :0 mine is definitely a lot more simple, I’d just want infinite money in hand at all times"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "I like the search engine idea. Seems more manageable. Also infinite money does sound nice..."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "'absolute power corrupts absolutely'"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "whats that supposed to mean?"
+    hide speechTemp with fastdissolve
+    
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "money aint you bro"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "a guy can dream right?"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "He might be able to do a lot of good with all that money, unlike some other billionaires I know.."
+    hide speechTemp with fastdissolve
+    
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "im just saying, would you even be the same person if you had infinite money?"
+    hide speechTemp with fastdissolve
+
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "and im jus saying, money would solve literally every problem"
+    hide speechTemp with fastdissolve
 
     menu:
         "Nothing wrong with wanting infinite money. And if it solves all your problems, go for it.":
@@ -872,22 +1093,100 @@ label iWishCont:
             jump rWishCont
 
 label rWishCont:
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "I gotta say, one thing I would definitely want to do would be to get an incredible gaming PC rig"
     R "I would get the best setup possible, and maybe I would even hook you guys up with rigs to match mine (-; "
-    I "That’s a worthy goal if I have ever heard one, we would be able to run everything on ultra settings and probably still lose xD "
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
+    I "That’s a worthy goal if I have ever heard one, we would be able to run everything on ultra settings and probably still lose xD"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Hey man, at least we did it in style xD"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "I like it man, you gotta treat yourself right?"
     C "I mean, with infinite money, why not go all out on the things you love"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "I still think there is definitely such thing as having too much money though. Like I said, absolute power corrupts absolutely"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "What if we capped the money at one hundred million. Then you would have a fixed upper limit to what you could spend or donate and would have to more selective about what you did with it"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Okay okay, I like it I like it"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "While that is less than infinity, I will say that is still a fk ton of money, so I think you could solve a lot of problems if you did it wisely"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "That’s a lot of popeyes chicken sandwiches man mm mm  mm"
     S "lip smack * 3"
     S "damn damn damn. If I had infinite money. I would go hunting for nessie with big ass harpoons and Oreos."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "why do you think that Nessie would want Oreos?"
-    S "I saw it in a movie that Nessie likes Oreos so I gotta try it out man"
-    I "If you saw it in the movie then that checks out I guess"
+    hide speechTemp with fastdissolve
+    
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
+    S "I saw it in a movie that Nessie likes Oreos so I gotta try it out man."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
+    I "If you saw it in the movie then that checks out I guess."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "Ye ye ye. Don’t knock it til you try it my brotha"
 
 ########################################################
@@ -895,24 +1194,81 @@ label rWishCont:
 ########################################################
 ### SUNNY WISH
     S "But I already thought of something better already. If I had a genie, I would wish that wherever I go, I would always be treated as a guest."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "ok what does that mean?"
+    hide speechTemp with fastdissolve
 
     menu:
         "Well, he could go to any place or approach any person, and always be welcome, even like the white house or the pope":
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "No no no, thats not what i meant. I meant I could take anything I want, cuz I'm a guest right?"
+            hide speechTemp with fastdissolve
+
+        
             jump sWishCont
 
         "That could mean you have access to anything. As a guest, you could have whatever you want just by taking it. No need for infinite money.":
             $ sunny_rp += 1
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "Yeyeye exactly! If you're a guest, like, you can literally just take whatever you want!"
+            hide speechTemp with fastdissolve
+
             jump sWishCont
 
 label sWishCont:
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "... I feel like that isn’t how it really works…"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "Sunny, no, how does that even make any sense"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "just cuz ur a guest doesn't mean you can steal whatever you want, you’ll get in trouble"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "but im a guest!"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "Yea and guests can get kicked out too, it doesn’t grant you permanent diplomatic immunity for everything"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "Just try not to steal, buddy, I think you will be in the clear"
 
 ########################################################
@@ -922,86 +1278,311 @@ label sWishCont:
     C "But I think that if it was me, I would make it so that no matter where I go in the world, I would always have a place to live that I already own"
     C "Like for example, if I traveled to Germany or Japan, I would just show up and have a place to stay."
     C "No matter where it is, I’ve always got some real estate"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "Damn. I like it."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Yo that would be perfect bro, you could literally just bounce between places all the time and not have to worry about rent or anything, right?"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "woowww infinite real estate huh. That means that I can be a guest at all of Chris’ houses"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "Yes sunny, you don’t need a super power for that to be the case, though <3"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Can I come too? xD"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "Where do you think you would spend the most time at though?"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "Hmmm damn I think it would have to be somewhere really warm all the time, where it’s always summer and I can always have some sunshine."
+    hide speechTemp with fastdissolve
 
     menu:
         "How about Hawaii?":
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "I mean, Hawaii would be fun to visit, but I was thinking Okinawa to be honest."
             jump cWishCont
 
         "Okinawa has good weather right?":
             $ chris_rp += 1
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "Exactly, that's what I was thinking!"
             jump cWishCont
 
         "I hear the Bermuda Triangle is popping.":
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "That sounds like something up Sunny’s alley, but for me I would probably want to go to Okinawa."
             jump cWishCont
 
 label cWishCont:
     C "I hear it’s really nice, and the people have such a long average lifespan that I feel like it would be good for me"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Yo Okinawa would be nice, plus you would be so close to mainland Japan and the rest of Asia"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "I would definitely come visit you there Chris"
+    hide speechTemp with fastdissolve
 
 ########################################################
 ########################################################
 ########################################################
 ### MC WISH
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "Ok but what about you %(mc_name)s? What would you wish for?"
+    hide speechTemp with fastdissolve
 
     menu:
         "I wish I had transportation whenever I wanted.":
             $ chris_rp += 3
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "That sounds pretty handy, like if you needed a car there would always just be one for you?"
+            hide speechTemp with fastdissolve
             MC "Exactly. Depending on the situation, I would have a car, airplane, bike, boat, or any or type of transportation immediately available"
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "Danggg, I like it. I might leave the house more if I had a power like that."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "Yo, that’s exactly what I was thinking! I would still need some kind of destination though"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "If we combined our powers of infinite real estate and perpetually available travel, we could go anywhere in the world"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "If you’re saying that you get free transportation at any time to any destination, then your two wishes would work really well together."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "It would be a pretty great reason to travel since you would save on flights and everything else, not to mention places to stay."
             C "You know, this conversation feels like it could be a great topic for the podcast"
+            hide speechTemp with fastdissolve
+            
             jump askPod
 
         "I wish I could master any skill.":
             $ ihraz_rp += 3
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "oh thats really cool! Its like mine, but different."
+            hide speechTemp with fastdissolve
             MC "Yea but instead of knowledge, if i choose to master any skill and i try it, i automatically can do it."
-            C "thats actually super practical"
-            R "its kinda op"
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
+            C "Thats actually super practical."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
+            R "It's kinda op."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "yea you can be so successful in life"
-            MC "and i wont have the feds investigating me, ill just be a super lucky prodigy"
-            I "I like that a lot, but more importantly, that was a riveting conversation, we should consider putting that one on the podcast"
+            hide speechTemp with fastdissolve
+
+            MC "And i wont have the feds investigating me, I'll just be a super lucky prodigy."
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
+            I "I like that a lot, but more importantly, that was a riveting conversation, we should consider putting that one on the podcast."
+            hide speechTemp with fastdissolve
+
             jump askPod
 
         "I wish I could eat whatever I wanted, whenever.":
             $ sunny_rp == 3
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "wait any food, anywhere? Sounds like a fantasy"
+            hide speechTemp with fastdissolve
+
             MC "Yea whatever food i feel like eating, i can have as much of it as i want, on command"
+
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "you know, i was thinking that too. Can you read my mind or something?"
-            C "what do you mean, you chose being a guest, and thatll be free food too"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
+            C "what do you mean, you chose being a guest, and that'll be free food too."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "yea but any food, anywhere?? For FREE?!"
             S "*looks straight at MC*"
             S "I would make you my best friend"
+            hide speechTemp with fastdissolve
+
             MC "and id be willing to share!"
-            S "dang this was a good topic, we shouldve saved it for the podcast"
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
+            S "dang this was a good topic, we should've saved it for the podcast"
+            hide speechTemp with fastdissolve
+            
             jump askPod
 
         "i wish I could automatically always have the newest phone or computer.":
             $ rasmey_rp += 1
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "like a software update, but no waiting?"
+            hide speechTemp with fastdissolve
+
             MC "no, more like i wouldnt even have to buy the newest phone or graphics card, Id always be up to date"
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "Yoooo I love that, like you automatically just get buffed up to the newest tech all the time?"
+            hide speechTemp with fastdissolve
+            
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "Man, you could get the latest graphics cards and play Gang of Gods on ultra super mega settings"
+            hide speechTemp with fastdissolve
+            
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "Man, I would want to play some VR"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "Even after buying the newest stuff, everything goes obsolete within a year or two. Man, I am starting to rethink my wish now xD"
+            hide speechTemp with fastdissolve
+
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "its too late, you made your choice, and it just got beat"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "Now that I think about it, what if we made these choices on the podcast? this would have been such a good topic, bois"
+            hide speechTemp with fastdissolve
+
             jump askPod
 
 ########################################################
@@ -1010,7 +1591,7 @@ label cWishCont:
 ### ASK ABOUT THE PODCAST + OLD PILOT LOL
 label askPod:
     MC "Podcast?"
-    # Show visual of 4 of us witrh eyes glinting greedily as a scene
+    # Show visual of 4 of us with eyes glinting greedily as a scene
     # play remake of pod intro with 4 of us
     # scene mcrTemp
     C "You ever walk into a McReynold's and order a kid's meal trying to fill that... void in your life?"
@@ -1031,8 +1612,15 @@ label askPod:
         "Aight imma head out.":
             "That was fking weird and my sanity can only take so much"
             #Visual: Shadow sunny with red eyes
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "who said you could leave"
             S "youre one of us now"
+            hide speechTemp with fastdissolve
+            
             All "one of us"
             All "one of us!"
             All "ONE OF US!"
@@ -1047,41 +1635,178 @@ label askPod:
 ########################################################
 ### EXPLAIN THE PODCAST
 label podExplain:
+
+    scene guysTemp:
+        zoom .6
+    with fade
+
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "that was our intro!"
-    C "yea basically we have a pod, and its been going pretty well, but we recently ran into a problem"
-    R "thing is, we don't have a guest lined up for next week’s episode"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
+    C "yea basically we have a pod, and its been going pretty well, but we recently ran into a problem."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
+    R "thing is, we don't have a guest lined up for next week’s episode."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "we usually have a wait list, but next week’s guest had to bail"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "i mean we do fine by ourselves, but getting outside input always spices things up."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
     I "yea like that wish conversation we were just having, it definitely helped to have a fresh perspective available."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "fresh cookies too"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1440
+        ypos 150
     R "Ahem! in any case, yes we're looking for a sub-in guest, but we’ve got quite a few episodes out already and i gotta say, they’re pretty good."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "And it feels good to create, I never thought we’d come this far"
+    hide speechTemp with fastdissolve
 
     menu:
-        "That's pretty awesome, I want to more about this podcast.":
+        "That's pretty awesome, how did you all start?":
             $ pp += 3
-            I "funny you should say that, we actually have an episode about our origin story"
-            C "its worth listening to, but i guess you could say this place right here was the birthplace of the idea"
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
+            I "Funny you should ask that, we actually have an episode about our origin story."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
+            C "its worth listening to, but i guess you could say this place right here was the birthplace of the idea."
+            hide speechTemp with fastdissolve
+
             MC "here? Like, the McReynolds?"
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "yup. Just like this, we’d hang out and have some interesting conversations, then one day we were like, hey why dont we record this?"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "thats the short version, the origin story episode has the rest xD"
+            
             jump endDay1
 
         "Congrats on starting a podcast, I hope it does well!":
             $ pp += 1
-            C "thanks, we’re gonna be famous"
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
+            C "Thanks, we’re gonna be famous."
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "and rich, once we get to monetize"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "we gotta get sponsors too for like ads"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "true, true, all in good time"
+
             jump endDay1
 
         "Who listens to podcasts though? They're kinda lame:/":
             $ pp -= 1
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "slightly uncalled for"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 480
+                ypos 0
             I "to each their own i guess"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 0
+                ypos 30
             S "what? A lot of people listen to podcasts!"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1300
+                ypos 0
             C "i know i do, pretty regularly actually. Might hit up our latest one on the drive home"
+            hide speechTemp with fastdissolve
+            
+            show speechTemp:
+                zoom .18
+                xpos 1440
+                ypos 150
             R "oh i still have to finish that one, sunny’s stories are wilddd"
+
             jump endDay1
 
 ########################################################
@@ -1090,12 +1815,39 @@ label podExplain:
 ### END OF DAY 1!!!!
 label endDay1:
     R "but for now, i gotta head out guys, i gotta get up early tomorrow"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 1300
+        ypos 0
     C "yea me too. I guess we’ll see you around too, in class and here too if u want"
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "cookies on us next time"
+    hide speechTemp with fastdissolve
+
+
     MC "that was pretty fun, i wouldnt mind doing it again"
     MC "see you guys later"
-    I "ill give u a ride to ur car sunny"
+    
+    show speechTemp:
+        zoom .18
+        xpos 480
+        ypos 0
+    I "I'll give you a ride to your car sunny."
+    hide speechTemp with fastdissolve
+    
+    show speechTemp:
+        zoom .18
+        xpos 0
+        ypos 30
     S "thank you thank you"
+    hide speechTemp with fastdissolve
 
     #add visuals / scenes for getting home
     #reflection time
