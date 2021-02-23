@@ -10,8 +10,29 @@ define professor = Character("Professor")
 define unknown = Character("?")
 define mcrEmp = Character("McReynold's Employee")
 
-#transition change
+#new variables
 define fastdissolve = Dissolve(0.2)
+
+screen sunnyRP_screen():
+    frame:
+        align(1.0, 0.0)
+        text "Points with Sunny: You have [sunny_rp]!"
+screen ihrazRP_screen():
+    frame:
+        align(1.0, 0.05)
+        text "Points with ihraz: You have [ihraz_rp]!"
+screen chrisRP_screen():
+    frame:
+        align(1.0, 0.1)
+        text "Points with chris: You have [chris_rp]!"
+screen rasmeyRP_screen():
+    frame:
+        align(1.0, 0.15)
+        text "Points with rasmey: You have [rasmey_rp]!"
+screen PP_screen():
+    frame:
+        align(1.0, 0.2)
+        text "Points for the Podcast: You have [pp]!"
 
 
 # background images
@@ -81,9 +102,16 @@ label start:
     $ pp = 0
     $ mc_name = renpy.input("What is your name? (Type and press Enter)")
     $ mc_name = mc_name.strip()
-    
     "Welcome to the game, %(mc_name)s!"
     # MC "im %(mc_name)s"
+
+
+
+    # show screen sunnyRP_screen() 
+    # show screen ihrazRP_screen() 
+    # show screen chrisRP_screen() 
+    # show screen rasmeyRP_screen() 
+    # show screen PP_screen()
 
     play music ominous
     scene darkRoomTemp:
@@ -138,6 +166,7 @@ label start:
     with fade
 
     "Well, the day is finally here. My first day of classes!"
+
     "I really couldn't sleep last night much though..."
     "Guess I have been feeling a bit anxious about starting school since I don't know anyone here yet."
     "...well, guess I had better get ready to go!"
@@ -235,6 +264,7 @@ label start:
         "Uhhh.. no?":
             $ sunny_rp += 1
             jump sunnyDayOneContinue
+
             unknown "That's okay, I don't either."
             "...yeah, I could tell..."
             jump sunnyDayOneContinue
