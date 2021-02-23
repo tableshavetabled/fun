@@ -1,4 +1,4 @@
- # declare characters used in the game
+# declare characters used in the game
 define MC = Character("Me", color="#0004ff")
 define S = Character("Sunny", color="#005500")
 define I = Character("Ihraz", color="#aa0000")
@@ -25,6 +25,7 @@ image nightStreetTemp = "nightStreetTemp.jpg"
 image mcrTemp = "mcrTemp.png"
 image geassTemp = "geassTemp.jpg"
 image guysTemp = "guysTemp.jpg"
+image logoTemp = "logoTemp.png"
 
 # character images
 image chrisTemp = "chrisTemp.jpg"
@@ -65,6 +66,9 @@ image speechTemp = "speechTemp.png"
 ########################################################
 ### INTRO
 label start:
+    # show trt logo
+    scene logoTemp with fade
+    
     # relationship points and variables
     $ sunny_rp = 0
     $ ihraz_rp = 0
@@ -77,6 +81,7 @@ label start:
     $ pp = 0
     $ mc_name = renpy.input("What is your name? (Type and press Enter)")
     $ mc_name = mc_name.strip()
+    
     "Welcome to the game, %(mc_name)s!"
     # MC "im %(mc_name)s"
 
@@ -143,7 +148,7 @@ label start:
 ########################################################
 ### WALKING ON CAMPUS
     scene schoolPathTemp:
-        zoom 3
+        zoom 4.5
 
     play music "audio/blueDream.mp3"
     "Campus in the fall sure is beautiful!"
@@ -268,7 +273,7 @@ label sunnyDayOneContinue:
 ### WALK TO CLASS 2
     play music "audio/blueDream.mp3"
     scene schoolPathTemp:
-        zoom 3
+        zoom 4.5
     with fade
     "Ok... English next."
     "The building should be somewhere around here."
@@ -351,7 +356,7 @@ label ihrazDayOneContinue:
 ########################################################
 ### WALK TO CAFETERIA
     scene schoolPathTemp:
-        zoom 3
+        zoom 4.5
     with fade
     play music "audio/blueDream.mp3"
     "Man, those two guys in my classes today really caught me off guard."
@@ -395,7 +400,7 @@ label ihrazDayOneContinue:
 ########################################################
 ### WALK TO CLASS 3
     scene schoolPathTemp:
-        zoom 3
+        zoom 4.5
     with fade
     "Time to head to math!"
     "I have never been that great at math, but thankfully I won't need to take too many classes while I'm here."
@@ -520,7 +525,7 @@ label continueClassThree:
 ########################################################
 ### WALK TO CLASS 4
     scene schoolPathTemp:
-        zoom 3
+        zoom 4.5
     with fade
     "Let's see, the art building is just down the sidewalk.."
 
@@ -610,10 +615,11 @@ label toMcr:
     "I'm just going to keep my head down for the rest of the day."
     "I have the worst luck."
     "Although now I can finally EAT! To McReynolds I go."
-    scene nightStreetTemp
+    scene nightStreetTemp:
+        zoom 1.6
     with fade
     stop music
-    play music "audio/blueDream.mp3"
+    play music "audio/teaTime.mp3"
     "It's actually so nice out right now."
     "But man am I hungry. Luckily it's right across the street from campus."
     "On the bright side, classes weren't so bad. And there were some interesting people too..."
@@ -641,9 +647,11 @@ label toMcr:
 ########################################################
 ### ARRIVE AT MCR + FLASHBACK
     stop music fadeout 2
-    scene mcrTemp
+    scene mcrTemp:
+        zoom 1.5
     with fade
-    play sound "audio/shopJingleTemp.mp3"
+    play sound "audio/shopJingleTemp.mp3"    
+
     "Time to see what my leftover cash can get me."
 
     play music ominous
@@ -678,8 +686,12 @@ label toMcr:
     stop music fadeout 1.0
     with dissolve
 
-    scene mcrTemp
+    scene mcrTemp:
+        zoom 1.5
     with fade
+
+    $ renpy.music.set_volume(0.5, 0.6, channel="music")
+    play music "audio/loveMexico.mp3"
     "Hey I know those voices!"
     "...also what's with this feeling of deja vu?"
 
@@ -700,7 +712,7 @@ label toMcr:
     unknown "Hold on, I thought it was my turn?"
     hide ihrazTemp
 
-    # Show conforntation picture between ihraz/sunny as scene
+    # Show confrontation picture between ihraz/sunny as scene
     # with fade
 
     show sunnyTemp
@@ -712,7 +724,8 @@ label toMcr:
     unknown "I'm getting the cookies this time."
     hide ihrazTemp
 
-    scene mcrTemp
+    scene mcrTemp:
+        zoom 1.5
     "hey it's some of the people I ran into today."
     "Guess something's going on there, involving... cookies?"
 
@@ -844,7 +857,8 @@ label approachGuys:
 ### MC BUYS COOKIES OR ELSE + WISH EXPLAIN
     scene geassTemp
     with fade
-    scene mcrTemp
+    scene mcrTemp:
+        zoom 1.5
     with fade
 
     MC "uhh.. sure .. yea i can do that"
@@ -1591,9 +1605,13 @@ label cWishCont:
 ### ASK ABOUT THE PODCAST + OLD PILOT LOL
 label askPod:
     MC "Podcast?"
+
+    stop music
+
     # Show visual of 4 of us with eyes glinting greedily as a scene
     # play remake of pod intro with 4 of us
     # scene mcrTemp
+    #   zoom 1.5
     C "You ever walk into a McReynold's and order a kid's meal trying to fill that... void in your life?"
     C "Well it's time to put that cheeseburger down and fill that void with us!"
     S "I'm Sunny!"
@@ -1620,7 +1638,7 @@ label askPod:
             S "who said you could leave"
             S "youre one of us now"
             hide speechTemp with fastdissolve
-            
+
             All "one of us"
             All "one of us!"
             All "ONE OF US!"
@@ -1851,6 +1869,12 @@ label endDay1:
 
     #add visuals / scenes for getting home
     #reflection time
+
+    scene nightStreetTemp:
+        zoom 1.6
+    with fade
+    play music "audio/teaTime.mp3"
+
     "Well, I don’t think anything could have prepared me for that!"
     "I feel like none of the people in my old town would have conversations like that"
     "but these guys vibe together while being so… vastly different"
@@ -1869,6 +1893,8 @@ label endDay1:
     "They mentioned that they need a guest for their next episode… I wonder who they will have on since their original guest bailed?"
     "Well, in any case, I guess I had better get home and get ready for tomorrow"
     "Hopefully I will run into those guys in class again!"
+
+    
 
 
 
